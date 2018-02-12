@@ -11,8 +11,7 @@ import machine
 red_led = machine.Pin(16, machine.Pin.OUT)
 blue_led = machine.Pin(12, machine.Pin.OUT)
 green_led = machine.Pin(13, machine.Pin.OUT)
-
-p2 = machine.Pin(2, machine.Pin.IN, machine.Pin.PULL_UP)
+button = machine.Pin(2, machine.Pin.IN, machine.Pin.PULL_UP)
 
 i = 1
 while(True):
