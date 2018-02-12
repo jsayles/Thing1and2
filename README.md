@@ -1,8 +1,9 @@
 # Thing 1 and Thing 2
 An overly simplistic set of communication devices
 
-## REPL
+## Userful Commands
 ```screen /dev/tty.SLAB_USBtoUART 115200```
+```ampy --port /dev/tty.SLAB_USBtoUART ls```
 
 ## Hardware
 
