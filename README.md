@@ -1,5 +1,5 @@
 # Thing 1 and Thing 2
-An overly simplistic set of communication devices
+An overly simplistic set of communication devices: Thing1 and Thing2
 
 ## Userful Commands
 ```screen /dev/tty.SLAB_USBtoUART 115200```
