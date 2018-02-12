@@ -2,7 +2,7 @@
 An overly simplistic set of communication devices
 
 ## REPL
-screen /dev/tty.SLAB_USBtoUART 115200
+```screen /dev/tty.SLAB_USBtoUART 115200```
 
 ## Hardware
 
@@ -16,9 +16,10 @@ screen /dev/tty.SLAB_USBtoUART 115200
 
 ## Pins
 
+* 2 = Button
+* 4,5 = I2C Buzzer
 * 12 = Blue led
 * 13 = Green led
-* 14 = Button
 * 16 = Red led
 
 ## Software
