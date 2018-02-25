@@ -28,9 +28,3 @@ green_led = machine.Pin(PIN_GREEN, machine.Pin.OUT, value=1)
 button = machine.Pin(PIN_BUTTON, machine.Pin.IN, machine.Pin.PULL_UP)
 vibe = machine.Pin(PIN_VIBE, machine.Pin.OUT, value=0)
 vibe_led = machine.Pin(PIN_VIBE_LED, machine.Pin.OUT, value=1)
-
-def hardware_test():
-    import led
-    import vibe
-    led.cycle()
-    led.pulse()
