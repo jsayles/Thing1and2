@@ -1,12 +1,28 @@
 #!/bin/bash
 source bin/activate
 
-if [ "$1" == "-f" ]; then
+if [ -z "$1" ]; then
+  echo "Available Ports: "
+  ls /dev/tty.SLAB_USBtoUART*
+  exit 1
+fi
+PORT=$1
+echo "Using $PORT"
+
+function upload {
+  SRC_FILE=$1
+  echo -n "Uploading $SRC_FILE..."
+  ampy -p $PORT put $SRC_FILE
+  echo
+}
+
+if [ "$2" == "-f" ]; then
   echo "Flashing the firmware..."
   cd firmware
-  ./flash.sh
-  cd -
-  sleep 1
+  ./flash.sh $PORT
+  cd - > /dev/null
+  echo "Waiting for reboot..."
+  sleep 6
 fi
 
 #for i in *.py;
@@ -17,14 +33,11 @@ fi
 
 echo "Uploading the source files..."
 cd src
-ampy -p /dev/tty.SLAB_USBtoUART put settings.py
-ampy -p /dev/tty.SLAB_USBtoUART put utils.py
-ampy -p /dev/tty.SLAB_USBtoUART put led.py
-ampy -p /dev/tty.SLAB_USBtoUART put vibe.py
-ampy -p /dev/tty.SLAB_USBtoUART put thingnet.py
-ampy -p /dev/tty.SLAB_USBtoUART put thing1.py
-ampy -p /dev/tty.SLAB_USBtoUART put thing2.py
-if [ "$1" == "-f" ]; then
-  ampy -p /dev/tty.SLAB_USBtoUART put main.py
-fi
-cd -
+upload settings.py
+upload utils.py
+upload led.py
+upload vibe.py
+upload thingnet.py
+upload thing1.py
+upload thing2.py
+cd - > /dev/null
