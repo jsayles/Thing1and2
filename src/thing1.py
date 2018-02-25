@@ -1,50 +1,29 @@
 import settings
 import machine
+import network
 import socket
 
-# Setup our hardware
-red_led = machine.Pin(settings.PIN_RED, machine.Pin.OUT)
-blue_led = machine.Pin(settings.PIN_BLUE, machine.Pin.OUT)
-green_led = machine.Pin(settings.PIN_GREEN, machine.Pin.OUT)
-button = machine.Pin(settings.PIN_BUTTON, machine.Pin.IN, machine.Pin.PULL_UP)
+from utils import send_value, watch_for_value
+
 
 # Access Point Interface (creating a wifi network)
 print("Turning on the Access Point (%s)" % settings.WIFI_ESSID)
+wlan = network.WLAN(network.STA_IF)
+wlan.active(False)
 ap = network.WLAN(network.AP_IF)
 ap.active(True)
 ap.config(essid=settings.WIFI_ESSID, password=settings.WIFI_PASSWD, authmode=3, channel=11, hidden=1)
 ap.ifconfig((settings.THING1_IP, '255.255.255.0', settings.THING1_IP, '8.8.8.8'))
 
-# Addresses for Thing1 and Thing2
-thing1_addr = socket.getaddrinfo(THING1_IP, THING1_PORT)[0][-1]
-thing2_addr = socket.getaddrinfo(THING2_IP, THING2_PORT)[0][-1]
 
-# Hook up our button interupt
-def send_button(pin):
-    s = socket.socket()
-    s.connect(thing2_addr)
-    s.send(bytes("VALUE:%d\r\n\r\n" % pin.value(), 'utf8'))
-    while True:
-        data = s.recv(100)
-        if data:
-            print(str(data, 'utf8'), end='')
-        else:
-            break
-    s.close()
-button.irq(trigger=Pin.IRQ_RISING | Pin.IRQ_FALLING, handler=send_button)
+# Hook up our button interupt to send the value over to Thing2
+def button_handler(pin):
+    send_value(settings.thing2_addr, pin.value())
+trigger = machine.Pin.IRQ_RISING | machine.Pin.IRQ_FALLING
+settings.button.irq(trigger=trigger, handler=button_handler)
 
-# Start our HTTP server to listen for Thing2
-addr = socket.getaddrinfo(THING1_IP, THING1_PORT)[0][-1]
-s = socket.socket()
-s.bind(addr)
-s.listen(1)
-while True:
-    cl, addr = s.accept()
-    print('client connected from', addr)
-    cl_file = cl.makefile('rwb', 0)
-    while True:
-        line = cl_file.readline()
-        if not line or line == b'\r\n':
-            break
-    cl.send("OK")
-    cl.close()
+
+# Listen for values comming from Thing2
+def thing2_watcher(msg):
+    print("Message from Thing2: '%s'" % msg)
+watch_for_value(settings.thing1_addr, thing2_watcher)
