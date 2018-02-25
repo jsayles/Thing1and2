@@ -1,10 +1,10 @@
 #!/bin/bash
 source bin/activate
 
-echo "Flashing the firmware..."
-cd firmware
-./flash.sh
-cd -
+#echo "Flashing the firmware..."
+#cd firmware
+#./flash.sh
+#cd -
 
 #for i in *.py;
 #do
