@@ -1,9 +1,10 @@
 import network
-import Settings
+import settings
 
 
 # Access Point Interface (creating a wifi network)
 def create(ip_address=None):
+    # Default to Thing1 address
     if not ip_address:
         ip_address = settings.THING1_IP
 
@@ -17,8 +18,9 @@ def create(ip_address=None):
 
 
 def join(ip_address=None):
+    # Default to Thing2 address
     if not ip_address:
-        ip_address = settings.THING1_IP
+        ip_address = settings.THING2_IP
 
     print("Connecting to Thing Net (SSID: %s)" % settings.WIFI_ESSID)
     wlan = network.WLAN(network.STA_IF)
