@@ -1,3 +1,4 @@
+import thingnet
 import settings
 import machine
 import network
@@ -8,15 +9,12 @@ import led
 
 from utils import send_value, watch_for_value
 
-# Start out with our LED red
+# Join Thing Net
 led.red()
-
-# Access Point Interface (creating a wifi network)
-print("Connecting to Access Point (%s)" % settings.WIFI_ESSID)
-wlan = network.WLAN(network.STA_IF)
-wlan.active(True)
-wlan.connect(settings.WIFI_ESSID, settings.WIFI_PASSWD)
-wlan.ifconfig((settings.THING2_IP, '255.255.255.0', settings.THING1_IP, '8.8.8.8'))
+thingnet.join(settings.thing2_addr)
+led.green()
+time.sleep(1)
+led.off()
 
 # Hook up our button interupt to send the value over to Thing2
 def button_handler(pin):
@@ -28,8 +26,3 @@ def thing1_watcher(msg):
     print("Message from Thing1: '%s'" % msg)
     vibe.pulse(.5)
 watch_for_value(settings.thing2_addr, thing1_watcher)
-
-# Turn the LED green to indicate we're ready to go
-led.green()
-time.sleep(1)
-led.off()
