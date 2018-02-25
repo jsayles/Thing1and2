@@ -5,12 +5,11 @@
 import time
 import machine
 import settings
+import utils
 import vibe
 import led
 
-# Hardware Test
-led.cycle()
-vibe.pulse()
+utils.hardware_test()
 
 # Hook up our button to vibe when pressed
 def button_handler(pin):
