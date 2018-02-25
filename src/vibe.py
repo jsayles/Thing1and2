@@ -17,12 +17,12 @@ import settings
 # pwm.duty(0)
 
 def on():
-    settings.red_led.off() # Off = Lighted
+    # settings.red_led.off() # Off = Lighted
     settings.vibe.on()
 
 
 def off():
-    settings.red_led.on() # on = Not lighted
+    # settings.red_led.on() # on = Not lighted
     settings.vibe.off()
 
 
