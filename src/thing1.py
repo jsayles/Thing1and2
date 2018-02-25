@@ -12,7 +12,7 @@ from utils import send_value, watch_for_value
 
 # Turn on Thing Net
 led.red()
-thingnet.create_thingnet(settings.thing1_addr)
+thingnet.create(settings.THING1_IP)
 led.green()
 time.sleep(1)
 led.off()

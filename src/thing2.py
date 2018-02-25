@@ -11,7 +11,7 @@ from utils import send_value, watch_for_value
 
 # Join Thing Net
 led.red()
-thingnet.join(settings.thing2_addr)
+thingnet.join(settings.THING2_IP)
 led.green()
 time.sleep(1)
 led.off()

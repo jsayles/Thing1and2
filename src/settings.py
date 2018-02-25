@@ -5,10 +5,13 @@ import machine
 WIFI_ESSID = "thingnet"
 WIFI_PASSWD = "uPy12345678"
 
+# Addresses for Thing1 and Thing2
 THING1_IP = "192.168.4.1"
 THING1_PORT = 8081
 THING2_IP = "192.168.4.2"
 THING2_PORT = 8082
+thing1_addr = socket.getaddrinfo(THING1_IP, THING1_PORT)[0][-1]
+thing2_addr = socket.getaddrinfo(THING2_IP, THING2_PORT)[0][-1]
 
 PIN_RED = 16
 PIN_BLUE = 12
@@ -16,10 +19,6 @@ PIN_GREEN = 13
 PIN_BUTTON = 2
 PIN_VIBE = 14
 PIN_VIBE_LED = 0
-
-# Addresses for Thing1 and Thing2
-thing1_addr = socket.getaddrinfo(THING1_IP, THING1_PORT)[0][-1]
-thing2_addr = socket.getaddrinfo(THING2_IP, THING2_PORT)[0][-1]
 
 # Setup our hardware
 red_led = machine.Pin(PIN_RED, machine.Pin.OUT, value=1)
