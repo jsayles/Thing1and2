@@ -22,7 +22,7 @@ if [ "$2" == "-f" ]; then
   ./flash.sh $PORT
   cd - > /dev/null
   echo "Waiting for reboot..."
-  sleep 6
+  sleep 3
 fi
 
 #for i in *.py;
