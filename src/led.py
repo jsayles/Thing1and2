@@ -14,48 +14,56 @@ def off():
     settings.blue_led.on()
     settings.green_led.on()
 
+def red_on():
+    settings.red_led.off()
+
+def red_off():
+    settings.red_led.on()
 
 def red():
-    settings.red_led.off()
-    settings.blue_led.on()
+    off()
+    red_on()
+
+def green_on():
+    settings.green_led.off()
+
+def green_off():
     settings.green_led.on()
-
-
-def blue():
-    settings.red_led.on()
-    settings.blue_led.off()
-    settings.green_led.on()
-
 
 def green():
-    settings.red_led.on()
-    settings.blue_led.on()
-    settings.green_led.off()
+    off()
+    green_on()
 
+def blue_on():
+    settings.blue_led.off()
+
+def blue_off():
+    settings.blue_led.on()
+
+def blue():
+    off()
+    blue_on()
 
 def white():
-    settings.red_led.off()
-    settings.blue_led.off()
-    settings.green_led.off()
-
+    off()
+    red_on()
+    green_on()
+    blue_on()
 
 def yellow():
-    settings.red_led.on()
-    settings.blue_led.off()
-    settings.green_led.off()
-
+    off()
+    green_on()
+    blue_on()
 
 def orange():
-    settings.red_led.off()
-    settings.blue_led.on()
-    settings.green_led.off()
-
+    off()
+    red_on()
+    green_on()
 
 def purple():
-    settings.red_led.off()
-    settings.blue_led.off()
-    settings.green_led.on()
-
+    off()
+    red_on()
+    blue_on()
 
 def cycle(seconds=1, full=False):
     off()
