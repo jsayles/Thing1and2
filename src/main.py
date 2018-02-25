@@ -9,6 +9,7 @@ import utils
 import vibe
 import led
 
+# Test the hardware
 utils.hardware_test()
 
 # Hook up our button to vibe when pressed
