@@ -1,10 +1,13 @@
 #!/bin/bash
 source bin/activate
 
-#echo "Flashing the firmware..."
-#cd firmware
-#./flash.sh
-#cd -
+if [ "$1" == "-f" ]; then
+  echo "Flashing the firmware..."
+  cd firmware
+  ./flash.sh
+  cd -
+  sleep 1
+fi
 
 #for i in *.py;
 #do
@@ -21,5 +24,7 @@ ampy -p /dev/tty.SLAB_USBtoUART put vibe.py
 ampy -p /dev/tty.SLAB_USBtoUART put thingnet.py
 ampy -p /dev/tty.SLAB_USBtoUART put thing1.py
 ampy -p /dev/tty.SLAB_USBtoUART put thing2.py
+if [ "$1" == "-f" ]; then
+  ampy -p /dev/tty.SLAB_USBtoUART put main.py
+fi
 cd -
-
