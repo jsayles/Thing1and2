@@ -36,6 +36,6 @@ An overly simplistic set of communication devices: Thing1 and Thing2
 
 ## TODO
 
-* Wire up button - use interrupts
-* Wire up haptic Board
-* Wire up power switch - Connect EN to Ground
+* Make LED class to abstract all LEDs
+* Use PWM to dim power LED
+* Use main LED for network status 
