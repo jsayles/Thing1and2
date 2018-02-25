@@ -1,51 +1,79 @@
+#####################################################################
+# Functions to operate the RGB led
+#
+# Note:  LED is wired high so bring led pin low to turn on.
+#####################################################################
+
 import time
 import settings
 import machine
 
 
-def led_off():
-    red_led.on()
-    blue_led.on()
-    green_led.on()
+def off():
+    settings.red_led.on()
+    settings.blue_led.on()
+    settings.green_led.on()
 
 
-def led_red():
-    red_led.off()
-    blue_led.on()
-    green_led.on()
+def red():
+    settings.red_led.off()
+    settings.blue_led.on()
+    settings.green_led.on()
 
 
-def led_blue():
-    red_led.on()
-    blue_led.off()
-    green_led.on()
+def blue():
+    settings.red_led.on()
+    settings.blue_led.off()
+    settings.green_led.on()
 
 
-def led_green():
-    red_led.on()
-    blue_led.on()
-    green_led.off()
+def green():
+    settings.red_led.on()
+    settings.blue_led.on()
+    settings.green_led.off()
 
 
-def led_white():
-    red_led.off()
-    blue_led.off()
-    green_led.off()
+def white():
+    settings.red_led.off()
+    settings.blue_led.off()
+    settings.green_led.off()
 
 
-def led_yellow():
-    red_led.on()
-    blue_led.off()
-    green_led.off()
+def yellow():
+    settings.red_led.on()
+    settings.blue_led.off()
+    settings.green_led.off()
 
 
-def led_orange():
-    red_led.off()
-    blue_led.on()
-    green_led.off()
+def orange():
+    settings.red_led.off()
+    settings.blue_led.on()
+    settings.green_led.off()
 
 
-def led_purple():
-    red_led.off()
-    blue_led.off()
-    green_led.on()
+def purple():
+    settings.red_led.off()
+    settings.blue_led.off()
+    settings.green_led.on()
+
+
+def cycle(seconds=1, full=False):
+    off()
+    red()
+    time.sleep(seconds)
+    if full:
+        purple()
+        time.sleep(seconds)
+    blue()
+    time.sleep(seconds)
+    if full:
+        yellow()
+        time.sleep(seconds)
+    green()
+    time.sleep(seconds)
+    if full:
+        orange()
+        time.sleep(seconds)
+        white()
+        time.sleep(seconds)
+    off()

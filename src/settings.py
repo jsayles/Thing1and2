@@ -30,17 +30,7 @@ vibe = machine.Pin(PIN_VIBE, machine.Pin.OUT, value=0)
 vibe_led = machine.Pin(PIN_VIBE_LED, machine.Pin.OUT, value=1)
 
 def hardware_test():
-    i = 0
-    while(i < 3):
-        red_led.on()
-        blue_led.on()
-        green_led.on()
-        if i == 1:
-            red_led.off()
-        elif i == 2:
-            blue_led.off()
-        else:
-            green_led.off()
-            i = 0
-        time.sleep(1)
-        i = i + 1
+    import led
+    import vibe
+    led.cycle()
+    led.pulse()
