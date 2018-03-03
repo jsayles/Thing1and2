@@ -22,7 +22,7 @@ if [ "$2" == "-f" ]; then
   ./flash.sh $PORT
   cd - > /dev/null
   echo "Waiting for reboot..."
-  sleep 3
+  sleep 4
 fi
 
 #for i in *.py;
@@ -33,11 +33,10 @@ fi
 
 echo "Uploading the source files..."
 cd src
+upload core.py
 upload settings.py
 upload utils.py
-upload led.py
-upload vibe.py
-upload thingnet.py
-upload thing1.py
-upload thing2.py
+# upload thingnet.py
+# upload thing1.py
+# upload thing2.py
 cd - > /dev/null
