@@ -35,7 +35,8 @@ echo "Uploading the source files..."
 cd src
 upload core.py
 upload settings.py
-upload utils.py
+upload main.py
+# upload utils.py
 # upload thingnet.py
 # upload thing1.py
 # upload thing2.py

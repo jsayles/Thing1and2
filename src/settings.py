@@ -43,9 +43,3 @@ if my_mac_address == THING2_MAC:
     # I am Thing2 - Green
     I_AM_THING2 = True
     vibe.set_status_led(green_led)
-
-# Hardware Test
-power_led.off()
-main_led.cycle()
-vibe.pulse()
-power_led.on()
