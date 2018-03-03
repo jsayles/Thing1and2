@@ -1,14 +1,4 @@
-import led
-import vibe
 import socket
-import settings
-
-# Hardware Test
-def hardware_test():
-    settings.power_led.on() # On = Off
-    led.cycle()
-    vibe.pulse()
-    settings.power_led.off() # Off = On
 
 # Hook up our button interupt
 def send_value(to_addr, value):
