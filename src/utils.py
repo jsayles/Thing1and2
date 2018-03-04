@@ -1,7 +1,12 @@
 import socket
 
-# Hook up our button interupt
+
+''' Send given value to the given address. '''
 def send_value(to_addr, value):
+    if not to_addr:
+        print("Remote Address Not Set!")
+        return
+
     msg = "VALUE:%d" % value
     print("Sending '%s' to '%s'" % (msg, to_addr))
     s = socket.socket()
@@ -14,7 +19,13 @@ def send_value(to_addr, value):
     #     print("Error: '%s'" % return_msg)
     s.close()
 
+
+''' Watch network for incoming value and send it to callback function. '''
 def watch_for_value(my_addr, callback):
+    if not my_addr:
+        print("Local Address Not Set!")
+        return
+
     s = socket.socket()
     s.bind(my_addr)
     s.listen(1)

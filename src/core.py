@@ -102,17 +102,17 @@ class RGB_LED:
         self.red()
         time.sleep(seconds)
         if full:
-            self.purple()
-            time.sleep(seconds)
-        self.blue()
-        time.sleep(seconds)
-        if full:
-            self.yellow()
+            self.orange()
             time.sleep(seconds)
         self.green()
         time.sleep(seconds)
         if full:
-            self.orange()
+            self.yellow()
+            time.sleep(seconds)
+        self.blue()
+        time.sleep(seconds)
+        if full:
+            self.purple()
             time.sleep(seconds)
             self.white()
             time.sleep(seconds)
