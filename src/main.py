@@ -1,6 +1,7 @@
 import socket
 from machine import Pin, Timer
 
+from core import PRESS, RELEASE
 from utils import send_value, watch_for_value
 
 
@@ -10,6 +11,10 @@ local_address = None
 network_interface = None
 thing1_addr = socket.getaddrinfo(THING1_IP, THING1_PORT)[0][-1]
 thing2_addr = socket.getaddrinfo(THING2_IP, THING2_PORT)[0][-1]
+
+# LEDs to indicate local and remote activity
+local_led = None
+remote_led = None
 
 
 #####################################################################
@@ -44,28 +49,35 @@ def join_thingnet():
 
 ''' Called when the button is pressed. '''
 def local_handler(pin):
-    # Send the value over the network
-    send_value(remote_address, pin.value())
+    value = pin.value()
+    if value == PRESS:
+        local_led.on()
+    else:
+        local_led.off()
+    send_value(remote_address, value)
 
 
 ''' Called when a button press action comes in from the network.'''
 def remote_handler(value):
-    if value == 0:
+    if value == PRESS:
+        remote_led.on()
         vibe.on()
     else:
+        remote_led.off()
         vibe.off()
 
 
 ''' Called periodicly to check the network status. '''
 def timer_handler(timer):
     print("Checking THINGNET Connectivity")
-    print("network_interface: %s" % network_interface)
     if not network_interface:
+        print("  Interface not initialized!")
         return
-    print("isconnected: %s" % network_interface.isconnected())
     if network_interface.isconnected():
+        print("  Connected!")
         main_led.red_off()
     else:
+        print("  Not Connected!")
         main_led.red_on()
 
 
@@ -85,10 +97,14 @@ if I_AM_THING1:
     local_address = thing1_addr
     remote_address = thing2_addr
     network_interface = create_thingnet()
+    local_led = blue_led
+    remote_led = green_led
 else:
     local_address = thing2_addr
     remote_address = thing1_addr
     network_interface = join_thingnet()
+    local_led = green_led
+    remote_led = blue_led
 
 # Start a timer to watch our network
 Timer(-1).init(period=1000, callback=timer_handler, mode=Timer.PERIODIC)

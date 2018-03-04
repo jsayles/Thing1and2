@@ -13,13 +13,13 @@ def send_value(to_addr, value):
     try:
         s.connect(to_addr)
         s.send(bytes(msg+"\r\n\r\n", 'utf8'))
-        # return_msg = str(s.recv(64), 'utf8')
-        # if return_msg == "OK":
-        #     print("Message Received!")
-        # else:
-        #     print("Error: '%s'" % return_msg)
+        return_msg = str(s.recv(64), 'utf8')
+        if return_msg == "OK":
+            print("  Message Received!")
+        else:
+            print("  Error: '%s'" % return_msg)
     except Exception as e:
-        print("Problem connecting: %s" % str(e))
+        print("  Problem connecting: %s" % str(e))
     finally:
         s.close()
 
@@ -43,7 +43,6 @@ def watch_for_value(my_addr, callback):
             line = cl_file.readline()
             if not line or line == b'\r\n':
                 break
-            print("Received: '%s'" % line)
             if line[:6] == b'VALUE:':
                 value = int(line[6:])
                 break

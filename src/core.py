@@ -3,7 +3,8 @@ import time
 
 LOW = 0
 HIGH = 1
-
+PRESS = 0
+RELEASE = 1
 
 class LED:
 
@@ -131,21 +132,21 @@ class Vibe:
     # Turn off the pin
     # pwm.duty(0)
 
-    def __init__(self, pin, status_led=None):
+    def __init__(self, pin, led=None):
         self.pin = pin
-        self.status_led = status_led
+        self.led = led
 
-    def set_status_led(self, status_led):
-        self.status_led = status_led
+    def set_led(self, led):
+        self.led = led
 
     def on(self):
-        if self.status_led:
-            self.status_led.on()
+        if self.led:
+            self.led.on()
         self.pin.on()
 
     def off(self):
-        if self.status_led:
-            self.status_led.off()
+        if self.led:
+            self.led.off()
         self.pin.off()
 
     def pulse(self, seconds=.5):
