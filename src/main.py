@@ -91,10 +91,10 @@ else:
     network_interface = join_thingnet()
 
 # Start a timer to watch our network
-Timer(-1).init(period=2000, callback=timer_handler, mode=Timer.PERIODIC)
+Timer(-1).init(period=1000, callback=timer_handler, mode=Timer.PERIODIC)
 
 # Hook up our button to the local handler
 button.irq(handler=local_handler, trigger=Pin.IRQ_RISING | Pin.IRQ_FALLING)
 
 # Listen for values coming in over the network
-watch_for_value(remote_address, remote_handler)
+watch_for_value(local_address, remote_handler)
