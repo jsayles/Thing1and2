@@ -1,16 +1,14 @@
 import socket
 from machine import Pin, Timer
 
-from core import PRESS, RELEASE
+from core import PRESS, RELEASE, Thingnet
 from utils import send_value, watch_for_value
 
 
 # Network Variables
+network_interface = None
 remote_address = None
 local_address = None
-network_interface = None
-thing1_addr = socket.getaddrinfo(THING1_IP, THING1_PORT)[0][-1]
-thing2_addr = socket.getaddrinfo(THING2_IP, THING2_PORT)[0][-1]
 
 # LEDs to indicate local and remote activity
 local_led = None
@@ -93,16 +91,17 @@ power_led.on()
 red_led.on()
 
 # Fire up our Network
+thingnet = Thingnet(THING_ID, WIFI_SSID, WIFI_PASS, IP_RANGE)
 if I_AM_THING1:
-    local_address = thing1_addr
-    remote_address = thing2_addr
-    network_interface = create_thingnet()
+    local_address = thingnet.thing1_addr
+    remote_address = thingnet.thing2_addr
+    network_interface = thingnet.create_thingnet()
     local_led = blue_led
     remote_led = green_led
 else:
-    local_address = thing2_addr
-    remote_address = thing1_addr
-    network_interface = join_thingnet()
+    local_address = thingnet.thing2_addr
+    remote_address = thingnet.thing1_addr
+    network_interface = thingnet.join_thingnet()
     local_led = green_led
     remote_led = blue_led
 

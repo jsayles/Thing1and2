@@ -33,8 +33,8 @@ fi
 
 echo "Uploading the source files..."
 cd src
-upload core.py
 upload settings.py
 upload utils.py
+upload core.py
 upload main.py
 cd - > /dev/null

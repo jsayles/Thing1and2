@@ -1,7 +1,8 @@
 import network
 from machine import Pin
 
-from core import HIGH, LOW, LED, RGB_LED, Vibe
+from core import LED, RGB_LED, Vibe
+from core import THING1, THING2, HIGH, LOW
 
 
 # Hardware Settings
@@ -19,16 +20,14 @@ vibe_pin = Pin(14, Pin.OUT, value=0)
 vibe = Vibe(vibe_pin)
 
 # Network Settings
-WIFI_ESSID = "thingnet"
-WIFI_PASSWD = "uPy12345678"
-THING1_IP = "192.168.4.1"
-THING1_PORT = 8081
-THING2_IP = "192.168.4.2"
-THING2_PORT = 8082
+WIFI_SSID = "thingnet"
+WIFI_PASS = "uPy12345678"
+IP_RANGE = "192.168.4.1"
 THING1_MAC = b'\x18\xfe4\xd3\x81\xd5'
 THING2_MAC = b'\x18\xfe4\xd3\x89\x1a'
 
 # Who Am I?!?
+THING_ID = None
 I_AM_THING1 = False
 I_AM_THING2 = False
 my_mac_address = network.WLAN().config('mac')
@@ -36,7 +35,9 @@ if my_mac_address == THING1_MAC:
     # I Am Thing1
     print("I am Thing1!")
     I_AM_THING1 = True
+    THING_ID = THING1
 if my_mac_address == THING2_MAC:
     # I am Thing2
     print("I am Thing2!")
     I_AM_THING2 = True
+    THING_ID = THING2

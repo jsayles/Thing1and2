@@ -1,10 +1,15 @@
 import time
+import network
+import socket
 
 
+THING1 = 1
+THING2 = 2
 LOW = 0
 HIGH = 1
 PRESS = 0
 RELEASE = 1
+
 
 class LED:
 
@@ -153,3 +158,50 @@ class Vibe:
         self.on()
         time.sleep(seconds)
         self.off()
+
+
+class Thingnet:
+
+    def __init__(self, thing_id, ssid, passwd, ip_range):
+        self.thing_id = thing_id
+        self.ssid = ssid
+        self.passwd = passwd
+
+        # Calculate the address for Thing1
+        split_ip = ip_range.split('.')
+        split_ip[3] = str(THING1)
+        self.thing1_ip = ".".join(split_ip)
+        self.thing1_port = 8080 + THING1
+        self.thing1_addr = (self.thing1_ip, self.thing1_port)
+
+        # Calculate the ip for Thing2
+        split_ip[3] = str(THING2)
+        self.thing2_ip = ".".join(split_ip)
+        self.thing2_port = 8080 + THING2
+        self.thing2_addr = (self.thing2_ip, self.thing2_port)
+
+    def create_thingnet(self):
+        print("Turning on THINGNET (SSID:  %s)" % self.ssid)
+
+        # Turn off the other interface
+        network.WLAN(network.STA_IF).active(False)
+
+        # Create an access point for THINGNET
+        ap = network.WLAN(network.AP_IF)
+        ap.active(True)
+        ap.config(essid=self.ssid, password=self.passwd, authmode=3, channel=11, hidden=1)
+        ap.ifconfig((self.thing1_ip, '255.255.255.0', self.thing1_ip, '8.8.8.8'))
+        return ap
+
+    def join_thingnet(self):
+        print("Connecting to THINGNET (SSID: %s)" % self.ssid)
+
+        # Turn off the other interface
+        network.WLAN(network.AP_IF).active(False)
+
+        # Join the THINGNET network
+        wlan = network.WLAN(network.STA_IF)
+        wlan.active(True)
+        wlan.connect(self.ssid, self.passwd)
+        wlan.ifconfig((self.thing2_ip, '255.255.255.0', self.thing1_ip, '8.8.8.8'))
+        return wlan
