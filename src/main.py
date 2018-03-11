@@ -16,31 +16,6 @@ remote_led = None
 
 
 #####################################################################
-# Helper Functions
-#####################################################################
-
-
-def create_thingnet():
-    print("Turning on THINGNET (SSID:  %s)" % WIFI_ESSID)
-    network.WLAN(network.STA_IF).active(False)
-    ap = network.WLAN(network.AP_IF)
-    ap.active(True)
-    ap.config(essid=WIFI_ESSID, password=WIFI_PASSWD, authmode=3, channel=11, hidden=1)
-    ap.ifconfig((THING1_IP, '255.255.255.0', THING1_IP, '8.8.8.8'))
-    return ap
-
-
-def join_thingnet():
-    print("Connecting to THINGNET (SSID: %s)" % WIFI_ESSID)
-    wlan = network.WLAN(network.STA_IF)
-    wlan.active(True)
-    wlan.connect(WIFI_ESSID, WIFI_PASSWD)
-    wlan.ifconfig((THING2_IP, '255.255.255.0', THING1_IP, '8.8.8.8'))
-    return wlan
-
-
-
-#####################################################################
 # Handler Functions
 #####################################################################
 
@@ -93,15 +68,15 @@ red_led.on()
 # Fire up our Network
 thingnet = Thingnet(THING_ID, WIFI_SSID, WIFI_PASS, IP_RANGE)
 if I_AM_THING1:
+    network_interface = thingnet.create_thingnet()
     local_address = thingnet.thing1_addr
     remote_address = thingnet.thing2_addr
-    network_interface = thingnet.create_thingnet()
     local_led = blue_led
     remote_led = green_led
 else:
+    network_interface = thingnet.join_thingnet()
     local_address = thingnet.thing2_addr
     remote_address = thingnet.thing1_addr
-    network_interface = thingnet.join_thingnet()
     local_led = green_led
     remote_led = blue_led
 
