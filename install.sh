@@ -1,12 +1,11 @@
 #!/bin/bash
-source bin/activate
+source venv/bin/activate
 
 if [ -z "$1" ]; then
-  echo "Available Ports: "
-  ls /dev/tty.SLAB_USBtoUART*
-  exit 1
+  PORT="/dev/tty.SLAB_USBtoUART"
+else
+  PORT=$1
 fi
-PORT=$1
 echo "Using $PORT"
 
 function upload {
