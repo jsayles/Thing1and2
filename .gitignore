@@ -102,3 +102,6 @@ ENV/
 
 pip-selfcheck.json
 .Python
+
+# Pycharm
+.idea/
