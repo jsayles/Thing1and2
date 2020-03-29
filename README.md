@@ -1,9 +1,6 @@
 # Thing 1 and Thing 2
-An overly simplistic set of communication devices: Thing1 and Thing2
-
-## Userful Commands
-```screen /dev/tty.SLAB_USBtoUART 115200```
-```ampy --port /dev/tty.SLAB_USBtoUART ls```
+An overly simplistic set of communication devices: Thing1 and Thing2.
+You press the button on Thing1 and the light/haptic on Thing2 is triggered.  Same is true the other way around.  
 
 ## Hardware
 
@@ -25,14 +22,9 @@ An overly simplistic set of communication devices: Thing1 and Thing2
 
 ## Software
 
-* Circuit Python 2.2.3
+* ~~Circuit Python 2.2.3~~
+* Circuit Python 3.1.2
 * CircuitPython for ESP8266: https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-for-esp8266
-
-## Identity
-
-For this code to work thing1 and thing2 need to know who they are and which
-role they are playing.  To do this their individual mac addresses are set in
-settings.py which checks the mac and sets I_AM_THING1 and I_AM_THING2 accordingly.
 
 ## Tutorials
 
@@ -46,6 +38,36 @@ You need to install the CP2104 USB drivers in order to interact with the huzzah 
 
 https://learn.adafruit.com/adafruit-feather-huzzah-esp8266/using-arduino-ide
 http://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers
+
+## Python Environment Install
+
+```
+python3 -m venv .venv
+source .venv/bin/activate
+pip install pip --upgrade
+pip install -r requirements.txt
+```
+
+## Userful Commands
+Enter the REPL:  
+```
+screen /dev/tty.SLAB_USBtoUART 115200
+```
+
+List files on the feather.  With the .ampy file you don't need to specify the port:
+```
+ampy --port /dev/tty.SLAB_USBtoUART ls
+```
+
+## Identity
+
+For this code to work thing1 and thing2 need to know who they are and which
+role they are playing.  To do this their individual mac addresses are set in
+settings.py which checks the mac and sets I_AM_THING1 and I_AM_THING2 accordingly.
+
+## Useful Links
+
+Adafruit Ampy Tool:  https://github.com/scientifichackers/ampy
 
 ## TODO
 

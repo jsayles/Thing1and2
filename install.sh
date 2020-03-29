@@ -1,5 +1,7 @@
 #!/bin/bash
-source venv/bin/activate
+
+# Activate python environment
+source .venv/bin/activate
 
 if [ -z "$1" ]; then
   PORT="/dev/tty.SLAB_USBtoUART"
