@@ -22,8 +22,7 @@ You press the button on Thing1 and the light/haptic on Thing2 is triggered.  Sam
 
 ## Software
 
-* ~~Circuit Python 2.2.3~~
-* Circuit Python 3.1.2
+* CircuitPython 3.1.2:  https://circuitpython.readthedocs.io/en/3.x/README.html
 * CircuitPython for ESP8266: https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-for-esp8266
 
 ## Tutorials
@@ -54,9 +53,14 @@ Enter the REPL:
 screen /dev/tty.SLAB_USBtoUART 115200
 ```
 
-List files on the feather.  With the .ampy file you don't need to specify the port:
+List files on the feather.  (With the .ampy file you don't need to specify the port):
 ```
 ampy --port /dev/tty.SLAB_USBtoUART ls
+```
+
+Erase the feather:  
+```
+esptool.py --port /dev/tty.SLAB_USBtoUART erase_flash
 ```
 
 ## Identity
@@ -67,7 +71,9 @@ settings.py which checks the mac and sets I_AM_THING1 and I_AM_THING2 accordingl
 
 ## Useful Links
 
-Adafruit Ampy Tool:  https://github.com/scientifichackers/ampy
+* Adafruit Ampy Tool:  
+  * https://github.com/scientifichackers/ampy
+  * https://learn.adafruit.com/micropython-basics-load-files-and-run-code/
 
 ## TODO
 
