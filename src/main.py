@@ -2,11 +2,13 @@ import time
 import socket
 from machine import Pin, Timer
 
-from core import PRESS, RELEASE, Thingnet
+from core import PRESS, RELEASE
 from utils import send_value, watch_for_value
+from thingnet import Thingnet
 
 
 thingnet = None
+
 
 # LEDs to indicate local and remote activity
 local_led = None

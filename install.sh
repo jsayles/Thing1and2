@@ -37,5 +37,6 @@ cd src
 upload settings.py
 upload utils.py
 upload core.py
+upload thingnet.py
 upload main.py
 cd - > /dev/null
