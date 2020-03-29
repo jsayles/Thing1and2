@@ -40,6 +40,13 @@ settings.py which checks the mac and sets I_AM_THING1 and I_AM_THING2 accordingl
 * Haptic Controller: https://learn.adafruit.com/adafruit-drv2605-haptic-controller-breakout/circuitpython-code
 * LED Circuit: https://learn.adafruit.com/remote-control-with-the-huzzah-plus-adafruit-io/monitor-wiring
 
+## USB Drivers
+
+You need to install the CP2104 USB drivers in order to interact with the huzzah feather.  
+
+https://learn.adafruit.com/adafruit-feather-huzzah-esp8266/using-arduino-ide
+http://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers
+
 ## TODO
 
 * Make LED class to abstract all LEDs
