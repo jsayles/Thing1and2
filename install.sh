@@ -10,11 +10,7 @@ else
 fi
 echo "Using $PORT"
 
-function upload {
-  SRC_FILE=$1
-  echo -n "Uploading $SRC_FILE..."
-  ampy -p $PORT put $SRC_FILE
-  echo
+
 }
 
 if [ "$2" == "-f" ]; then
@@ -25,6 +21,12 @@ if [ "$2" == "-f" ]; then
   echo "Waiting for reboot..."
   sleep 4
 fi
+
+function upload {
+  SRC_FILE=$1
+  echo -n "Uploading $SRC_FILE..."
+  ampy -p $PORT put $SRC_FILE
+  echo
 
 #for i in *.py;
 #do

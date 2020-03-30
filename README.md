@@ -24,6 +24,7 @@ You press the button on Thing1 and the light/haptic on Thing2 is triggered.  Sam
 
 * CircuitPython 3.1.2:  https://circuitpython.readthedocs.io/en/3.x/README.html
 * CircuitPython for ESP8266: https://learn.adafruit.com/welcome-to-circuitpython/circuitpython-for-esp8266
+* **System Documetation**: [docs/main.md](docs/main.md)
 
 ## Tutorials
 
@@ -63,20 +64,8 @@ Erase the feather:
 esptool.py --port /dev/tty.SLAB_USBtoUART erase_flash
 ```
 
-## Identity
-
-For this code to work thing1 and thing2 need to know who they are and which
-role they are playing.  To do this their individual mac addresses are set in
-settings.py which checks the mac and sets I_AM_THING1 and I_AM_THING2 accordingly.
-
 ## Useful Links
 
 * Adafruit Ampy Tool:  
   * https://github.com/scientifichackers/ampy
   * https://learn.adafruit.com/micropython-basics-load-files-and-run-code/
-
-## TODO
-
-* Make LED class to abstract all LEDs
-* Use PWM to dim power LED
-* Use main LED for network status
