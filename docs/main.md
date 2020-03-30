@@ -25,8 +25,11 @@ Erase the feather and upload a new CircutePython system.  All program files are 
 
 Installs the system files from */src* onto the feather.
 * -f: Flash the firmware before loading files
+  * Default: *False*
+* -p <port>:  Use the given port to upload files.
+  * Default: */dev/tty.SLAB_USBtoUART*
 * -m <mode>: Install the given mode (direct, local, remote) as main.py
-* -z <port>:  Use the given port to upload files.
+  * Default: *direct*
 
 Example:
 ```
